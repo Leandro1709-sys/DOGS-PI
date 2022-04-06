@@ -24,22 +24,13 @@ export default function reducer(state=initialState, {type, payload}){
                 ...state,
                 allTemps : payload
             };
-       case POST_DOG:
-                // console.log('GET_ALL_TEMPS')
-                  return {
-                      ...state,
-                  };
-              
-        
-        case FILTER_CREATED :
-                // console.log('GET_ALL_TEMPS')
-                const all=state.dogsBreed;
-                const filtredCreated = payload==='Created'?all.filter((e)=>e.created):all.filter((e)=>!e.created)
-                 return{
-                     ...state,
-                     dogsBreed : payload==='All'?state.dogsAll:filtredCreated,
-                 }
-        case FILTER_BY_TEMP :
+            case GET_ALL_TEMPS:
+          // console.log('GET_ALL_TEMPS')
+            return {
+                ...state,
+                allTemps : payload
+            };
+          case FILTER_BY_TEMP :
            // console.log('GET_ALL_TEMPS')
            const allDogs=state.dogsAll;
            var newTemp=[];
@@ -59,12 +50,21 @@ export default function reducer(state=initialState, {type, payload}){
             }
         
             const filtred = payload==='All'?allDogs:allDogs.filter((e)=>e.temperaments.includes(payload)) 
-               return{
+    
+    
+         
+           return{
                 ...state,
                 dogsBreed : filtred,
             };
          
-            case ORDER_BY_NAME :
+            case POST_DOG :
+          
+            return{
+                ...state,
+             }
+         
+             case ORDER_BY_NAME :
                 // console.log('GET_ALL_TEMPS')
                 let sortedDog= payload==='asc'?
                 state.dogsBreed.sort(function (a,b){
@@ -122,15 +122,10 @@ export default function reducer(state=initialState, {type, payload}){
                     dogsBreed : sortedWeigth,
                  }
             case GET_BY_NAME :
-             if(!payload.err){
                 return{
                     ...state,
                     dogsBreed : payload,
                 }
-            }else{
-                alert(payload.err)
-               return{ ...state }
-            }
           default : return state
     }  
 };
