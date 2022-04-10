@@ -48,13 +48,13 @@ export default function Detail() {
             </div>
             <div className="description">
     
-                  <h4>Height: {Dog.height} cm</h4>
+                  <h4>Altura: {Dog.height} cm</h4>
                 
-                  <h4>Weight: {Dog.weight} kg</h4>
+                  <h4>Peso: {Dog.weight} kg</h4>
                 
-                  <h4>Life Span: {Dog.life_span}</h4>
+                  <h4>Años de vida: {Dog.life_span}</h4>
                 
-                  <h4>Temperaments:</h4>
+                  <h4>Temperamentos:</h4>
                   <h4>{Dog.temperaments}</h4>
                 
             </div>

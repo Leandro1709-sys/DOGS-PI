@@ -5,7 +5,7 @@ import {useDispatch,useSelector} from 'react-redux';
 import { getAllDogs, getAllTemps, filterByTemp,filterCreated,orderByName,orderByW } from "../actions/index";
 import { Link } from "react-router-dom"
 import Dog from '../images/yellou.png'
-import Gif from '../images/search.gif'
+import Gif2 from '../images/search.gif'
 import Card from "./card";
 import Paginado from './paginado';
 import SearchBar from "./search-bar";
@@ -66,13 +66,13 @@ export default  function Home (){
         setCurrentPage(1);
         setOrden(`Ordenado ${e.target.value}`)
     }
-    //console.log(dogs)
+    console.log(dogs)
   
    // console.log('temps',temeperaments);
     return (
         
         <div className='container'>
-            {typeof dogs != 'objet'?<>
+            {dogs.length>0?<>
             <div className='nav'>
                 <div className="logo">
                     <a className='link' onClick={(e)=>handleClick(e)}>
@@ -135,7 +135,7 @@ export default  function Home (){
                 <Paginado dogsxPage={dogsxPage} dogs={dogs.length} paginado={paginado}/>
             </div>
             </>:<>
-            <div><img src={Gif}/><h1>SEARCHING...</h1></div>
+            <div><img src={Gif2}/><h1>SEARCHING...</h1></div>
             </>}
         </div>
             
