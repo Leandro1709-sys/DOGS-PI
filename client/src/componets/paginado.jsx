@@ -1,4 +1,6 @@
 
+import "./paginado.css";
+
 export {React} from 'react';
 
 
@@ -16,15 +18,16 @@ export default  function Paginado ({dogsxPage,dogs,paginado}){
     //console.log(pageNumber,'numero de pagina')
 
     return(
-        <nav>
-            <ul className='paginado'>
+        <nav className="paginador">
+            <div className='number'>
+              
                 {pageNumber &&
                 pageNumber.map(number=>(
-                       <li className='number' key={`${number}`}>
-                       <a onClick={()=>paginado(number)} >{number}</a>
-                       </li>
+                       
+                    <h1 onClick={()=>paginado(number)} className='numero'>{number}</h1>
+                       
                 ))}
-            </ul>
+            </div>
         </nav>
     )
 

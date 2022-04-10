@@ -1,8 +1,11 @@
+import './home.css'
 import React from "react";
 import { useState, useEffect } from "react";
 import {useDispatch,useSelector} from 'react-redux';
 import { getAllDogs, getAllTemps, filterByTemp,filterCreated,orderByName,orderByW } from "../actions/index";
 import { Link } from "react-router-dom"
+import Dog from '../images/yellou.png'
+import Gif from '../images/search.gif'
 import Card from "./card";
 import Paginado from './paginado';
 import SearchBar from "./search-bar";
@@ -64,49 +67,79 @@ export default  function Home (){
         setOrden(`Ordenado ${e.target.value}`)
     }
     //console.log(dogs)
-
+  
    // console.log('temps',temeperaments);
     return (
         
-        <div>
-             <Link to='/dogs'>Crear Raza</Link> 
-            <h1>Find yor DOG!</h1>
-            <button onClick={(e)=>{handleClick(e)}}> Recargar Página </button> 
-            <SearchBar/>
-            <div>
-               temperamentos: <select onChange={(e)=>{handleFilterTemp(e);}}>
-                <option value='All'>Todos...</option>
-                    {temeperaments.map(e=>{
-                        return <option value={e.name}>{e.name}</option>
-                    })}
-                </select>
-                creados: <select onChange={(e)=>{handleCreated(e);}}>
-                    <option value='All'>Todos</option>
-                    <option value='Api'>Existentes</option>
-                    <option value='Created'>Creados</option>
-                </select>
-            orden: <select onChange={(e)=>{handleOrderBy(e);}}>
-                    <option value='asc'>ASC</option>
-                    <option value='desc'>DES</option>
-                </select>
-               por peso:  <select onChange={(e)=>{handleByWeigth(e);}}>
-                    <option value='peso-asc'>ASC</option>
-                    <option value='peso-des'>DES</option>
-                </select>
-               <div className="cardcontainer">
-                <Paginado dogsxPage={dogsxPage} dogs={dogs.length} paginado={paginado}/>
+        <div className='container'>
+            {typeof dogs != 'objet'?<>
+            <div className='nav'>
+                <div className="logo">
+                    <a className='link' onClick={(e)=>handleClick(e)}>
+                    <img src={Dog} className='img_logo'></img>
+                    <h1>Find yor DOG!</h1>
+                    </a>
                 </div>
-               <div>
-              
-                { console.log(currentDog)}
-                    {currentDog && currentDog.map((e)=> {
-                        return <Card name={e.name} weight={e.weight} temperament={e.temperament?e.temperament:e.temperaments} image={e.imagen}/>
+                <div className="container_2">
+                    <div className="crea_busca">
+                        <div className='crear' >
+                        <Link to='/DogCreate'><button className='botonsCrea'><span>CREA UNA NUEVA RAZA!</span></button></Link> 
+                        </div>
+                        <div className='search'>
+                        <SearchBar/>
+                        </div>
+                    </div>
+                <div className="filtrado">
+                  
+                        <div className="box">
+                        <h1>Temperamentos: </h1> <select onChange={(e)=>{handleFilterTemp(e);}}  className='option'>
+                            <option value='All'>Todos...</option>
+                            {temeperaments.map(e=>{
+                                return <option value={e.name}>{e.name}</option>
+                            })}
+                        </select>
+                        </div>
+                        <div className="box">
+                        <h1>Creados/existentes:</h1><select onChange={(e)=>{handleCreated(e);}} className='option'>
+                            <option value='All'>Todos</option>
+                            <option value='Api'>Existentes</option>
+                            <option value='Created'>Creados</option>
+                        </select>
+                        </div>
+                        <div className="box">
+                        <h1>Orden alfabético:</h1> <select onChange={(e)=>{handleOrderBy(e);}} className='option'>
+                            <option value='asc'>A-Z</option>
+                            <option value='desc'>Z-A</option>
+                        </select>
+                        </div>
+                        <div className="box">
+                        <h1>Orden por peso:</h1><select onChange={(e)=>{handleByWeigth(e);}} className='option'>
+                            <option value='asc'>ASC</option>
+                            <option value='des'>DES</option>
+                        </select>
+                        </div>
+                        
+                 </div>
+                </div>
+            </div>
+            <div className="row">
+                { 
+                    currentDog && currentDog.map((e)=> {
+                       
+                        return <Card id={e.id} name={e.name} weight={e.weight} temperament={e.temperament?e.temperament:e.temperaments} image={e.imagen}/>
+                       
                     })
                 }
             </div>
+            <div className="paginado">
+                <Paginado dogsxPage={dogsxPage} dogs={dogs.length} paginado={paginado}/>
             </div>
-
+            </>:<>
+            <div><img src={Gif}/><h1>SEARCHING...</h1></div>
+            </>}
         </div>
+            
+        
     )
     
 }

@@ -1,20 +1,56 @@
+import './create-dog.css'
 import React,{useState,useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { getAllTemps, postDog } from "../actions";
+import { Link, useNavigate } from "react-router-dom";
+import { getAllDogs, postDog } from "../actions";
 //import { postDog, getAllTemps } from "../actions";
 
 function validate(input){
     let errors={}
-    if(!input.name){
-        errors.name='*campo obligatorio'
+    if(!Number(input.min_height)){
+        errors.min_height='*debe ser un número';
+    }else if(input.max_height&&parseInt(input.min_height)>parseInt(input.max_height)){
+        errors.max_height='*La altura máxima no puede ser inferior a la mínima!';
     }
+
+    if(!Number(input.max_height)){
+        errors.max_height='*debe ser un número';
+    }
+
+    if(!Number(input.min_weight)){
+        errors.min_weight='*debe ser un número';
+    }else if(input.max_weight&&parseInt(input.min_weight)>parseInt(input.max_weight)){
+        errors.max_weight='*El peso maximo no puede ser inferior al minimo';
+    }
+    if(!Number(input.max_weight)){
+        errors.max_weight='*debe ser un número';
+    }
+
+    if(!Number(input.min_life_span)){
+        errors.min_life_span='*debe ser un número';
+    } else if(input.max_life_span&&parseInt(input.min_life_span)>parseInt(input.max_life_span)){
+        errors.max_life_span='*Hasta no puede ser iferior a desde';
+    }
+    if(!Number(input.max_life_span)){
+        errors.max_life_span='*debe ser un número';
+    }
+    if(input.imagen){
+        var r = new RegExp(/^(ftp|http|https):[^ "]+$/);
+        if(!r.test(input.imagen)){
+            errors.imagen = '*Ingrese una URL válida'
+        }
+
+    }
+    return errors
+    
 }
 export default function CreateDog(){
     const dispatch=useDispatch();
-  //  const history=useHistory();
+    const navigate=useNavigate();
     const temperaments=useSelector((state)=>state.allTemps);
+    const [errors,setErrors]=useState({
 
+    })
     const [input,setInput]=useState({
         name:"",
         min_height:'',
@@ -27,19 +63,20 @@ export default function CreateDog(){
         temperament:[]
     })
 
-   // console.log(input)
+   console.log('errors => ',errors)
 
     // useEffect(()=>{
     //     dispatch(getAllTemps());},[dispatch]);
 
     function handleChange(e){
-      //  e.preventDefault();
-      console.log(e.target.name)
-     // let t=e.target.name;
+    //   console.log(e.target.name)
        setInput({...input,
         [e.target.name]:e.target.value
     })
-   // console.log(input)
+        setErrors(validate({
+            ...input,
+            [e.target.name]:e.target.value}))
+    console.log(errors)
     }
 
     function handleSelect(e){
@@ -52,6 +89,7 @@ export default function CreateDog(){
 }
 function hadleSubmit(e){
     e.preventDefault();
+   //    console.log(input)
     dispatch(postDog(input));
     alert('La raza fue agregada correctamente!');
     setInput({
@@ -65,45 +103,64 @@ function hadleSubmit(e){
         imagen: "",
         temperament:[]
     });
-   // history.push('/home')
+    dispatch(getAllDogs());
+   navigate('/home')
 }
+//habilito el boton solo si no hay errores
+
+
+return(
+
+    <div className="formulario"> 
     
-        return(
-    <div> 
-    <Link to="/home"><button>Ir al home</button></Link>
-        <h1>Crea la nueva Raza!</h1>
+        <h2 className='titolin'>RELLENE EL FORMULARIO</h2>
         <form onSubmit={(e)=>hadleSubmit(e)} className='form'>
-            <div>
-                <label>Nombre:</label>
-                <input type="text"  value={input.name} name="name"  onChange={(e)=>handleChange(e)} />
-                {input.name===''&&<a className="errors">*campo obligatorio</a>}
+            <div className='raza'>
+                <label className='labels'>Nombre de la Raza:</label>
+                <input type="text"  value={input.name} name="name" className='name' onChange={(e)=>handleChange(e)} />
+                {input.name===''?<a className="errors"> *campo obligatorio </a>:<a className="errors2">Comletado correctamente!</a>}
             </div>
-            <div>
-                <label>Altura:</label>
-                <input type="text" onChange={(e)=>handleChange(e)} style={{width:'80px'}} value={input.min_height} name="min_height" placeholder="min"/>
-                {input.name===''&&<a className="errors">*campo obligatorio</a>} - 
-                <input type="text" onChange={(e)=>handleChange(e)} style={{width:'80px'}} value={input.max_height} name="max_height" placeholder="max"/>
-                {input.name===''&&<a className="errors">*campo obligatorio</a>}
+           
+            <div className='raza'>
+                <label className='labels'>Altura mínima:</label>
+                    <input className='name' type="text" onChange={(e)=>handleChange(e)}  value={input.min_height} name="min_height" placeholder="centímetros..."/>
+                    {input.min_height===''?<a className="errors"> *campo obligatorio </a>:errors.min_height?<a className="errors">{errors.min_height}</a>:<a className="errors2">Comletado correctamente!</a>} 
             </div>
-            <div>
-                <label>Peso:</label>
-                <input type="text" onChange={(e)=>handleChange(e)} value={input.min_weight} name="min_weight" placeholder="min"></input>
-                {input.name===''&&<a className="errors">*campo obligatorio</a>}        - 
-                <input type="text" onChange={(e)=>handleChange(e)} value={input.max_weight} name="max_weight" placeholder="max"></input>
-                {input.name===''&&<a className="errors">*campo obligatorio</a>}
+           
+            <div className='raza'>
+                <label className='labels'>Altura máxima:</label>
+                    <input className='name' type="text" onChange={(e)=>handleChange(e)}  value={input.max_height} name="max_height" placeholder="centímetros..."/>
+                    {input.max_height===''?<a className="errors"> *campo obligatorio </a>:errors.max_height?<a className="errors">{errors.max_height}</a>:<a className="errors2">Comletado correctamente!</a>}
+            </div >
+            <div className='raza'>
+                <label className='labels'>Peso mínimo:</label>
+                    <input className='name' type="text" onChange={(e)=>handleChange(e)} value={input.min_weight} name="min_weight" placeholder="kilogramos..."></input>
+                    {input.min_weight===''?<a className="errors">*campo obligatorio</a>:errors.min_weight?<a className="errors">{errors.min_weight}</a>:<a className="errors2">Comletado correctamente!</a>}
             </div>
-            <div>
-                <label>Años de vida:</label>
-                <input type="text" onChange={(e)=>handleChange(e)} value={input.min_life_span} name="min_life_span" placeholder="desde"></input>
-                {input.name===''&&<a className="errors">*campo obligatorio</a>} - 
-                <input type="text" onChange={(e)=>handleChange(e)} value={input.max_life_span} name="max_life_span" placeholder="hasta"></input>
-                {input.name===''&&<a className="errors">*campo obligatorio</a>}
+            <div className='raza'>
+                <label className='labels'>Peso máximo:</label>
+                    <input className='name' type="text" onChange={(e)=>handleChange(e)} value={input.max_weight} name="max_weight" placeholder="kilogramos..."></input>
+                    {input.max_weight===''?<a className="errors">*campo obligatorio</a>:errors.max_weight?<a className="errors">{errors.max_weight}</a>:<a className="errors2">Comletado correctamente!</a>}
             </div>
-            <div>
-                <label>Imagen (url):</label>
-                <input type="text" value={input.imagen} onChange={(e)=>handleChange(e)} name="imagen" placeholder="ingrese URL"></input>
+            <div className='raza'>
+                Años de vida:
+                </div>
+            <div className='raza'>
+            <label className='labels'>Desde:</label>
+                <input className='name' type="text" onChange={(e)=>handleChange(e)} value={input.min_life_span} name="min_life_span" placeholder="años"></input>
+                {input.min_life_span===''?<a className="errors">*campo obligatorio</a>:errors.min_life_span?<a className="errors">{errors.min_life_span}</a>:<a className="errors2">Comletado correctamente!</a>}
             </div>
-             <div>  
+            <div className='raza'>
+            <label className='labels'>Hasta:</label>
+                <input className='name' type="text" onChange={(e)=>handleChange(e)} value={input.max_life_span} name="max_life_span" placeholder="años"></input>
+                {input.max_life_span===''?<a className="errors">*campo obligatorio</a>:errors.max_life_span?<a className="errors">{errors.max_life_span}</a>:<a className="errors2">Comletado correctamente!</a>}
+            </div>
+            <div className='raza'>
+                <label className='labels'>Imagen (url):</label>
+                <input className='name' type="text" value={input.imagen} onChange={(e)=>handleChange(e)} name="imagen" placeholder="ingrese URL"></input>
+                {input.imagen!=''&&errors.imagen!=''?<a className="errors">{errors.imagen}</a>:''}
+            </div>
+             <div className='raza'>  
                  Seleecione los Temperamentos:<select onChange={(e)=>handleSelect(e)}>
                 {
                  temperaments?.map((e)=>{
@@ -116,10 +173,20 @@ function hadleSubmit(e){
              Temperamentos Seleccionados:
                  { input.temperament.length?input.temperament.map((e)=>{
                     
-                 return <li style={{color:"green"}}> {e} </li>
-                 }):<li style={{color:"red"}} > Seleccione al menos un temperamento</li>}
+                 return <li className='labels' style={{color:"#000000"}}> {e} </li>
+                 }):<li className='errors' > Debe selecionar al menos un temperamento!</li>}
              </div>
-            <input type="submit" value="submit"/>
+             <div className="botonera">
+             { //VALIDACION DE ESTADO PARA HABILITAR BOTON
+                 input.name===''||input.min_height===''||input.mmax_height===''||input.min_weight===''
+                 ||input.max_weight===''||input.min_life_span===''||input.max_life_span===''||errors.min_height||errors.max_height||errors.min_weight
+                 ||errors.max_weight||errors.min_life_span||errors.max_life_span||errors.imagen
+                 ||!input.temperament.length?<button className="botonso23" type="submit" disabled='true'><span> controle el formulario! </span></button>
+                 : <button className="botonso2" type="submit" ><span>Crear RAZA!</span> </button>
+             }
+            
+            <Link to="/Home" className='linktohome'><button className='botonso'><span>volver al home</span></button></Link>              
+            </div>
             </form>
           
     </div>

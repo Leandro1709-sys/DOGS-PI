@@ -8,6 +8,9 @@ export const ORDER_BY_NAME = 'ORDER_BY_NAME';
 export const ORDER_BY_WEIGTH = 'ORDER_BY_WEIGTH';
 export const GET_BY_NAME = 'GET_BY_NAME';
 export const POST_DOG = 'POST_DOG';
+export const GET_DETAIL = 'GET_DETAIL';
+export const CLEAN_DOG_ID = 'CLEAN_DOG_ID';
+
 
 export  function getAllDogs(){
     return async function (dispatch){
@@ -37,18 +40,21 @@ export  function getAllTemps(){
 
 export  function postDog(payload){
     return async function (dispatch){
-  //console.log('postDog');
+//  console.log('payload =>',payload);
+  if(payload.imagen===''){
+
+  }
       const posteo = {
         "name":payload.name,
         "height": payload.min_height+' - '+payload.min_height,
         "weight": payload.min_weight+' - '+payload.max_height,
         "life_span": payload.min_life_span+' - '+payload.max_life_span,
-        "imagen": payload.imagen,
+        "imagen": payload.imagen!=""?payload.imagen:"https://png.pngtree.com/png-clipart/20201102/ourlarge/pngtree-cartoon-shiba-inu-dog-png-image_2385308.jpg",
         "temperament": payload.temperament
     }
-    console.log(posteo);
+   // console.log(posteo);
         const created = await axios.post('http://localhost:3001/dogs',posteo);
-        console.log('created',created);
+   //     console.log('created',created);
         dispatch({
             type : POST_DOG,
             payload : created.data,
@@ -78,6 +84,32 @@ export function orderByName(payload){
         payload ,
     }
 }
+
+export  function getDetail(id){
+    return async function (dispatch){
+      try{
+        const detail = await axios.get('http://localhost:3001/dogs/'+id);
+      //  console.log('detalle',detail);
+          dispatch({
+            type : GET_DETAIL,
+            payload : detail.data,
+        })
+
+    }catch (err){
+        alert(err)
+    }
+}
+}
+export function cleanDogId() {
+    return (dispatch) => {
+      let action = {
+        type: CLEAN_DOG_ID,
+        payload: [],
+      };
+      return dispatch(action);
+    };
+  }
+  
 
 export function orderByW(payload){
     return{

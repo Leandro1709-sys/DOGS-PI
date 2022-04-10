@@ -1,0 +1,32 @@
+
+.paginador{
+    display: flex;
+    background: rgb(212, 230, 59);
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+   
+    
+}
+
+.number{
+    align-content: space-between;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.numero{
+    padding: 5px;
+    margin: 0%;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.numero:hover{
+    color: crimson;
+    background: rgb(0, 0, 0);
+    backdrop-filter: blur(99px);
+  
+}
+

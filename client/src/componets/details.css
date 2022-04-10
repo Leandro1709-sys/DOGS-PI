@@ -1,0 +1,40 @@
+.cardContainer{
+    background: rgb(129, 255, 238);
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    margin: 0 auto; /* Centramos el formulario */
+    width:50%;   /* Sin ancho no podemos centrar el formulario */
+    background-color: rgb(133, 245, 236); /* Color blanco para el formulario */
+    padding: 2px; /* separamos los bordes del form del resto de elementos */
+    border-radius: 10px; /* Redondeamos los bordes del form */
+}
+.imgDet{
+    margin-top: 5px;
+}
+
+.header{
+    background: linear-gradient(to right,rgba(0, 255, 85, 0.8),#08e9b8);
+    width: 100%;
+    border-radius: 10px; /* Redondeamos los bordes del form */
+}
+.nombre{
+    margin: 0px;
+}
+.btn{
+    display: block;
+    color: #fff;
+    text-align: center;
+    background: linear-gradient(to left,rgba(92, 6, 126, 0.9),#b700ff);
+    margin-top: 20px;
+    text-decoration: none;
+    padding: 10px 5px;
+}
+
+.btn:hover{
+    background: linear-gradient(to right,rgba(92, 6, 126, 0.9),#b700ff);
+}
+.link{
+    text-decoration: none;
+}

@@ -1,0 +1,140 @@
+.form{
+    background: rgb(129, 255, 238);
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    margin: 0 auto; /* Centramos el formulario */
+    width:50%;   /* Sin ancho no podemos centrar el formulario */
+    background-color: rgb(133, 245, 236); /* Color blanco para el formulario */
+    padding: 2px; /* separamos los bordes del form del resto de elementos */
+    border-radius: 10px; /* Redondeamos los bordes del form */
+}
+.linktohome{
+    text-decoration: none;
+}
+.name{
+    width: 200px;
+    margin-bottom: 5px;
+}
+.labels{
+    width: 200px;
+    margin-right: 3px;
+  
+}
+
+.raza{
+    display: flex;
+    margin: 5px;
+
+    
+}
+
+.titolin{
+    background-color:#d9dc14;
+}
+.botonso {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 230px;
+    height:25px;
+    background: #f516bd;
+    color:rgb(0, 0, 0);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: .3seg ease all;
+    border-radius: 1px;
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+   
+}
+.botonso span{
+    position: relative;
+    z-index: 2;
+    transition: 0.3seg;
+}
+.botonso:after {
+	content: "";
+	width: 100%;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: calc(-100% - 80px);
+	border-bottom: 80px solid #ffe70e;
+	border-right: 80px solid transparent;
+	transition: .4s ease-in-out all;
+}
+
+.botonso:hover::after {
+	left: 0;
+    
+}
+input, textarea {
+    padding: 5px; /* Separamos la letra del interior (contenido) en los inputs de los bordes */
+}
+
+
+.botonso2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 230px;
+    height:25px;
+    background: #f1ee17;
+    color:rgb(0, 0, 0);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: .3seg ease all;
+    border-radius: 1px;
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+   
+}
+.botonso2 span{
+    position: relative;
+    z-index: 2;
+    transition: 0.3seg;
+}
+.botonso2:after {
+	content: "";
+	width: 100%;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: calc(-100% - 80px);
+	border-bottom: 80px solid #ff0ec3;
+	border-right: 80px solid transparent;
+	transition: .4s ease-in-out all;
+}
+
+.botonso2:hover::after {
+	left: 0;
+    
+}
+
+.botonso23 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 230px;
+    height:25px;
+    background: #f51616;
+    color:rgb(0, 0, 0);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: .3seg ease all;
+    border-radius: 1px;
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+   
+}

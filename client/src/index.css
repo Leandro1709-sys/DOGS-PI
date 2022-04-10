@@ -1,11 +1,10 @@
 body {
   margin: 0;
-  background-image: url('https://st.depositphotos.com/2459687/4663/v/450/depositphotos_46630063-stock-illustration-funny-animal-seamless-vector-pattern.jpg'); 
- 
- 
+  background: linear-gradient(to left,rgba(0, 255, 213, 0.986),#b700ff);
   font-family: 'Oswald', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-decoration: none;
 }
 
 code {

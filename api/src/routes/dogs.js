@@ -12,15 +12,15 @@ const getApiInfo = async()=>{
     try{
         const dogFind = await axios.get('https://api.thedogapi.com/v1/breeds?api_key=965a70f9-1376-41d2-9150-9b9f0703c803');
        //console.log(dogFind)
-        const dogData = await dogFind.data.map(el=>{
+        const dogData = await dogFind.data.map(e=>{
             return {
-                id: el.id,
-                name: el.name,
-                imagen: el.image.url,
-                height: el.height.metric,
-                weight: el.weight.metric,
-                life_span: el.life_span,
-                temperaments: el.temperament?el.temperament:"no tiene timperamentos",
+                id: e.id,
+                name: e.name,
+                imagen: e.image.url,
+                height: e.height.metric,
+                weight: e.weight.metric,
+                life_span: e.life_span,
+                temperaments: e.temperament?e.temperament:"Sin temperamento asignado",
             }
         });
        // console.log(dogData)
@@ -53,7 +53,7 @@ const getDbInfo = async()=>{
 };
 
 const getAllDogs = async ()=>{
-    console.log('entra getAllDogs')
+    //console.log('entra getAllDogs')
     try{
         let dbInfo = await getDbInfo();
         let apiInfo = await getApiInfo();
@@ -96,12 +96,31 @@ router.get('/:id', async (req,res,next)=>{
     const allDogs= await getAllDogs();
     //console.log(allDogs)
     if(id){
-        console.log(allDogs)
-            let newDog=allDogs.filter((e)=>e.id==id)
-        console.log('nuevo ',newDog);
-        newDog.length?res.send(newDog):res.send({msg:'no se encontro ninguna raza'}) 
-    } 
-});
+        //console.log(allDogs)
+        const newDog=allDogs.filter((e)=>e.id==id)
+
+        if(Array.isArray(newDog[0].temperaments)){
+        var temps=newDog[0].temperaments.map((e)=>{return e.dataValues.name})
+        temps=temps.toString();
+        } else{
+        var temps=newDog[0].temperaments;
+        }
+        var resultado={      
+                name :newDog[0].name,
+                height:newDog[0].height,
+                weight:newDog[0].weight,
+                life_span:newDog[0].life_span,
+                imagen:newDog[0].imagen,
+                temperaments:temps
+                }
+           }
+
+
+        //newDog[0].temperaments=oso
+        //console.log(temps);
+        res.send(resultado);
+    });
+
 
 router.post('/', async (req,res,next)=>{
     /*  name
@@ -126,8 +145,6 @@ router.post('/', async (req,res,next)=>{
     }) 
     // let oso=temp.map((e)=>{return e.dataValues.name})
     // console.log(oso)
-
-
     //relaciono la tabla Dog, con la de temperamento en dogXtemperament
     newDog.addTemperament(temp);
     res.send('Se agregó correctamente la nueva raza!')

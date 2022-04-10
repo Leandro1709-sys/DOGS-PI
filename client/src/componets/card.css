@@ -1,11 +1,53 @@
-.paginado{
-    display: flex;
-    padding: 3px;
-    align-content: center;
+.card{
+    margin-top: 5px;
+    background: #fff;
+    border:1px solid #ccc;
+    margin-bottom: 10px;
+    transition: 0.2s;
+    width: 280px;
+    height: 230px;
+}
+.card-header{
+    text-align: center;
+    padding: 5px 3px;
+    background: linear-gradient(to right, #16b6b6,#0bcea4 );
+    color: rgb(0, 0, 0);
+  
 }
 
-.number{
-    display: flex;
-    margin-left: 10px;
-    align-content: center;
+.card_body{
+    text-align: center;
+    font-size: 12px;
+    background-color: #0bcea4;
+    width: 280px;
+    height:190px;
+    
+}
+.link{
+        text-decoration: none;
+    }
+.imgCard{
+    margin-top: 5px;
+       max-width: 80%;
+       max-height:50px;
+    }
+.botonera{
+    margin-bottom: 5px;
+}
+.btn{
+    display: block;
+    color: #fff;
+    text-align: center;
+    background: linear-gradient(to left,rgba(92, 6, 126, 0.9),#b700ff);
+    margin-top: 20px;
+    text-decoration: none;
+    padding: 10px 5px;
+
+}
+.card:hover{
+    transform: scale(1.03);
+    box-shadow: 0 0 40px -10px rgba(0,0,0,0.25);
+}
+.btn:hover{
+    background: linear-gradient(to right,rgba(92, 6, 126, 0.9),#b700ff);
 }

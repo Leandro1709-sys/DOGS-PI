@@ -1,10 +1,14 @@
-import {GET_ALL_DOGS,GET_ALL_TEMPS, FILTER_BY_TEMP,FILTER_CREATED,ORDER_BY_NAME,ORDER_BY_WEIGTH,GET_BY_NAME,POST_DOG} from '../actions/index'
+import {GET_ALL_DOGS,GET_ALL_TEMPS,
+    FILTER_BY_TEMP,FILTER_CREATED,
+    ORDER_BY_NAME,ORDER_BY_WEIGTH,
+    GET_BY_NAME,POST_DOG,GET_DETAIL,CLEAN_DOG_ID} from '../actions/index'
 
 
 const initialState = {
      dogsBreed : [],
      allTemps: [],
      dogsAll :[],
+     detail:[]
     
      
 }
@@ -33,12 +37,21 @@ export default function reducer(state=initialState, {type, payload}){
         
         case FILTER_CREATED :
                 // console.log('GET_ALL_TEMPS')
-                const all=state.dogsBreed;
+                const all=state.dogsAll;
                 const filtredCreated = payload==='Created'?all.filter((e)=>e.created):all.filter((e)=>!e.created)
-                 return{
+               console.log(filtredCreated)
+                if(!filtredCreated.length){
+                    alert('No hay razas de perros creadas!')
+                    return{
+                        ...state,
+                        dogsBreed : state.dogsAll,
+                    }
+                }else{
+                return{
                      ...state,
                      dogsBreed : payload==='All'?state.dogsAll:filtredCreated,
                  }
+                }
         case FILTER_BY_TEMP :
            // console.log('GET_ALL_TEMPS')
            const allDogs=state.dogsAll;
@@ -59,10 +72,12 @@ export default function reducer(state=initialState, {type, payload}){
             }
         
             const filtred = payload==='All'?allDogs:allDogs.filter((e)=>e.temperaments.includes(payload)) 
+                
                return{
                 ...state,
                 dogsBreed : filtred,
-            };
+            }
+       
          
             case ORDER_BY_NAME :
                 // console.log('GET_ALL_TEMPS')
@@ -92,11 +107,12 @@ export default function reducer(state=initialState, {type, payload}){
                     ...state,
                     dogsBreed : sortedDog,
                  }
-                 case ORDER_BY_WEIGTH :
-                 console.log('ORDER_BY_WEIGTH')
-            
+
+            case ORDER_BY_WEIGTH :
+                console.log('ORDER_BY_WEIGTH',state.dogsBreed)
+                let newState=state.dogsBreed.filter((e)=>e.weight.length>3||e.weight.includes('NaN'));
                 let sortedWeigth= payload==='asc'?
-                state.dogsBreed.sort(function (a,b){
+                newState.sort(function (a,b){
                     if(parseInt(a.weight.replace(/ - /g,'')) > parseInt(b.weight.replace(/ - /g,'')) ){
                         return 1;
                     }
@@ -106,7 +122,8 @@ export default function reducer(state=initialState, {type, payload}){
                     else
                         return 0;
                     
-                }): state.dogsBreed.sort(function (a,b){
+                })
+                : newState.sort(function (a,b){
                     if(parseInt(a.weight.replace(/ - /g,'')) > parseInt(b.weight.replace(/ - /g,'')) ){
                         return -1;
                     }
@@ -127,10 +144,28 @@ export default function reducer(state=initialState, {type, payload}){
                     ...state,
                     dogsBreed : payload,
                 }
+                
             }else{
                 alert(payload.err)
                return{ ...state }
             }
+            case GET_DETAIL : 
+            if(!payload.err){
+                return{
+                    ...state,
+                    detail : payload,
+                }
+                
+            }else{
+                alert(payload.err)
+               return{ ...state }
+            }
+            case CLEAN_DOG_ID:
+                return {
+                    ...state,
+                    detail: [],
+                };
+
           default : return state
     }  
 };

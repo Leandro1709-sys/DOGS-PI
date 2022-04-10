@@ -1,0 +1,52 @@
+.navigate{
+display: flex;
+flex-direction: row;
+margin-top: 3px;
+justify-content: space-around;
+}
+
+.input{
+    height: 20px;
+}
+.botons {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 33px;
+    background: linear-gradient(to left,rgba(92, 6, 126, 0.9),#b700ff);
+    color:azure;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: .3seg ease all;
+ 
+    position: relative;
+    overflow: hidden;
+    
+}
+.botons span{
+    position: relative;
+    z-index: 2;
+    transition: 0.3seg;
+}
+.botons:after {
+	content: "";
+	width: 100%;
+    position: absolute;
+	z-index: 1;
+	top: 0;
+	left: calc(-100% - 80px);
+	border-bottom: 80px solid #db0bbf;
+	border-right: 80px solid transparent;
+	transition: .4s ease-in-out all;
+    
+}
+
+.botons:hover::after {
+	left: 0;
+ 
+    
+}
+

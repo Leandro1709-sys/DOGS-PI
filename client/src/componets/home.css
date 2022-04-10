@@ -1,0 +1,144 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to left,rgba(0, 255, 213, 0.986),#b700ff);
+}
+.nav{
+    background: linear-gradient(to right,rgba(0, 255, 213, 0.986),#b700ff);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    text-decoration: none;
+    border-color: #000000;
+    box-shadow: 0 0 40px -10px rgba(0,0,0,0.25);
+    height: 20%;
+    
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-flow:wrap ;
+    border-top: #000000 solid;
+    border-bottom: #000000 solid;
+
+    height: 70%;
+    
+}
+.paginado{
+    height: 10%;
+}
+.option{
+    width: 150px;
+    height: 30px;
+    margin: 5px;
+}
+
+.logo{
+    width: 70px;
+    margin: 5px;
+    
+}
+.img_logo{
+    height: 65px;
+     transition: 0.6seg;
+}
+h1{
+    font-size:medium;
+    margin: 3px;
+}
+.container_2{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+    
+}
+.search{
+    display: flex;
+    flex-direction: row;
+    
+    }
+    .crear{
+        margin-right: 110px;
+    }
+
+.crea_busca{
+   
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    height:50%;
+}
+.filtrado{
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  justify-content:space-around;
+  
+}
+.box{
+    margin: 5px;
+    display: flex;
+}
+.botonsCrea {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 30px;
+    background: #21e9c8;
+    color:#000000;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: .3seg ease all;
+    border-radius: 1px;
+    position: relative;
+    overflow: hidden;
+    margin-right: 5px;
+   
+}
+.botonsCrea span{
+    position: relative;
+    z-index: 2;
+    transition: 0.3seg;
+    text-decoration: none;
+    font-weight: bold;
+    
+}
+.botonsCrea:after {
+	content: "";
+	width: 100%;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: calc(-100% - 80px);
+	border-bottom: 80px solid #bed43e ;
+	border-right: 80px solid transparent;
+	transition: .3s ease-in-out all;
+}
+
+.botonsCrea:hover::after {
+	left: 0;
+    
+}
+
+.link{
+    color: #000000;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+

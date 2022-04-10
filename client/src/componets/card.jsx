@@ -1,7 +1,8 @@
 import {React} from 'react';
 import './card.css'
+import { Link } from 'react-router-dom';
 
-export default function Card({name,temperament,weight,image}){
+export default function Card({i,id,name,temperament,weight,image}){
     var temperamento='';
     // CONTROL DE FORMATOS DE TEMPERAMENTOS, SI ES LA LLAMADA INCIAL DEL HOME 
     // O ES LA LLAMDA DESDE EL FILTRADO POR TEMPERAMENTOS
@@ -16,7 +17,7 @@ export default function Card({name,temperament,weight,image}){
             temperamento=temperamento+temp[i];
             }
         }
-        console.log('temperamento de creado => ',temperamento);
+  
     }else{
             var temp = temperament.map((e)=>{return e})
             for(let i = 0 ; i<temp.length; i++){
@@ -26,16 +27,26 @@ export default function Card({name,temperament,weight,image}){
                     temperamento=temperamento+temp[i];
                 }
             }
-            console.log('temperamento de creado => ',temperamento);
+          //  console.log('temperamento de creado => ',temperamento);
     }
 
     } else temperamento=temperament;
+  //  console.log('la i que llega => ',i);
     return(
+        
         <div className='card'>
-            <img src={image} alt='link' width='300px' height='300px'></img>
-            <h3>{name}</h3>
-             <h5>{temperamento}</h5> 
-            <h3>{weight}</h3>
+            <div className="card-header">
+                <h1>{name}</h1>
+            </div>
+           <div className='card_body'>
+                <img src={image} className='imgCard'></img>
+                <p>Peso: {weight} KG<br/>
+                {temperamento} 
+                </p>
+            
+              <Link to={`/Detail/${id}`} className='btn'><a >DETALLES</a></Link>
+            </div>
         </div>
+        
     )
 }
