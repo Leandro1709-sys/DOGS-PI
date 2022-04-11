@@ -21,12 +21,15 @@
     margin: 0%;
     font-size: 13px;
     cursor: pointer;
+    font-weight: bold;
 }
 
-.numero:hover{
-    color: crimson;
-    background: rgb(0, 0, 0);
+.active, .numero:hover{
+    color: rgb(217, 255, 0);
+    background: rgb(134, 21, 134);
     backdrop-filter: blur(99px);
   
 }
+
+
 

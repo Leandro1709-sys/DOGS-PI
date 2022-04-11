@@ -1,5 +1,5 @@
 import  axios from 'axios';
-
+import NotFound from '../images/notFound.png'
 export const GET_ALL_DOGS = 'GET_ALL_DOGS';
 export const GET_ALL_TEMPS = 'GET_ALL_TEMPS';
 export const FILTER_BY_TEMP = 'FILTER_BY_TEMP';
@@ -49,7 +49,7 @@ export  function postDog(payload){
         "height": payload.min_height+' - '+payload.min_height,
         "weight": payload.min_weight+' - '+payload.max_height,
         "life_span": payload.min_life_span+' - '+payload.max_life_span,
-        "imagen": payload.imagen!=""?payload.imagen:"https://png.pngtree.com/png-clipart/20201102/ourlarge/pngtree-cartoon-shiba-inu-dog-png-image_2385308.jpg",
+        "imagen": payload.imagen!=""?payload.imagen:NotFound,
         "temperament": payload.temperament
     }
    // console.log(posteo);

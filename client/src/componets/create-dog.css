@@ -30,6 +30,10 @@
     
 }
 
+.eliminar{
+    color: #f51616;
+    cursor: pointer;
+}
 .titolin{
     background-color:#d9dc14;
 }
@@ -136,5 +140,22 @@ input, textarea {
     position: relative;
     overflow: hidden;
     margin: 10px;
+   
+}
+
+.elimina{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height:15px;
+    background: none;
+    color:rgb(255, 0, 0);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-radius: 1px;
+  
    
 }

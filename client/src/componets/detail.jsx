@@ -34,29 +34,17 @@ export default function Detail() {
       { !Array.isArray(Dog) ? 
         <>
         <div className="container">
-           <h2 className='titolin'>DETALLES DE LA RAZA</h2>
+           <h2 className='titolin'>{Dog.name}</h2>
           <div className="cardContainer">
             <div className="header">
-            <h2 className="nombre">{Dog.name}</h2>
-              <img className="imgDet"
-                src={Dog.imagen}
-                alt="Img not found"
-                width="220px"
-                height="220px"
-              />
-              
+            <h2 className="nombre"></h2>
+              <img className="imgDet" src={Dog.imagen}/>             
             </div>
             <div className="description">
-    
-                  <h4>Altura: {Dog.height} cm</h4>
-                
-                  <h4>Peso: {Dog.weight} kg</h4>
-                
-                  <h4>Años de vida: {Dog.life_span}</h4>
-                
-                  <h4>Temperamentos:</h4>
-                  <h4>{Dog.temperaments}</h4>
-                
+                  <h4>Altura: {Dog.height} centimetros</h4> 
+                  <h4>Peso: {Dog.weight} kiligramos</h4> 
+                  <h4>Años de vida: {Dog.life_span} años</h4> 
+                  <h3>Temperamentos:</h3><h4>{Dog.temperaments}</h4> 
             </div>
             <Link to="/Home" className='link'><a className='btn'>VOLVER AL HOME</a></Link>
           </div>

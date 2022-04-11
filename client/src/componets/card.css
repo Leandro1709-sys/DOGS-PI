@@ -1,4 +1,6 @@
 .card{
+    display: flex;
+    flex-direction: column;
     margin-top: 5px;
     background: #fff;
     border:1px solid #ccc;
@@ -14,13 +16,15 @@
     color: rgb(0, 0, 0);
   
 }
-
+.data{
+    height: 130px;
+}
 .card_body{
     text-align: center;
     font-size: 12px;
     background-color: #0bcea4;
     width: 280px;
-    height:190px;
+    height: 190px;
     
 }
 .link{
@@ -32,16 +36,17 @@
        max-height:50px;
     }
 .botonera{
-    margin-bottom: 5px;
+    margin-bottom: 0px;
+  
 }
 .btn{
     display: block;
     color: #fff;
     text-align: center;
     background: linear-gradient(to left,rgba(92, 6, 126, 0.9),#b700ff);
-    margin-top: 20px;
+     margin-bottom: 0px;
     text-decoration: none;
-    padding: 10px 5px;
+  
 
 }
 .card:hover{

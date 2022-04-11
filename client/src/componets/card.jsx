@@ -39,13 +39,17 @@ export default function Card({i,id,name,temperament,weight,image}){
                 <h1>{name}</h1>
             </div>
            <div className='card_body'>
+               <div className='data'>
                 <img src={image} className='imgCard'></img>
                 <p>Peso: {weight} KG<br/>
                 {temperamento} 
                 </p>
-            
-              <Link to={`/Detail/${id}`} className='btn'><a >DETALLES</a></Link>
+                </div>
+                <div className='botonera'>
+              <Link to={`/Detail/${id}`} className='btn'><a>DETALLES</a></Link>
+              </div>
             </div>
+            
         </div>
         
     )

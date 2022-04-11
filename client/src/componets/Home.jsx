@@ -16,6 +16,7 @@ export default  function Home (){
     const dispatch = useDispatch();
     const temeperaments = useSelector((state)=>state.allTemps);
     const dogs = useSelector((state)=>state.dogsBreed);
+ //   const byName = useSelector((state)=>state.byName);
     const [orden,setOrden] = useState('')
      
     //console.log('length',dogs.length);
@@ -34,9 +35,9 @@ export default  function Home (){
         dispatch(getAllTemps());},[dispatch]);
     
      useEffect(()=>{
-      dispatch(getAllDogs());},[dispatch]);    
-  
-  
+      dispatch(getAllDogs());},[dispatch]);  
+
+    
     function handleClick(e){
         e.preventDefault();
         dispatch(getAllDogs());
@@ -64,15 +65,18 @@ export default  function Home (){
         e.preventDefault();
         dispatch(orderByW(e.target.value));
         setCurrentPage(1);
-        setOrden(`Ordenado ${e.target.value}`)
+       setOrden(`Ordenado ${e.target.value}`)
     }
-    console.log(dogs)
+ 
+    //console.log(dogs)
+    
+  
   
    // console.log('temps',temeperaments);
     return (
         
         <div className='container'>
-            {dogs.length>0?<>
+            {dogs.length>0? <>
             <div className='nav'>
                 <div className="logo">
                     <a className='link' onClick={(e)=>handleClick(e)}>
@@ -85,7 +89,7 @@ export default  function Home (){
                         <div className='crear' >
                         <Link to='/DogCreate'><button className='botonsCrea'><span>CREA UNA NUEVA RAZA!</span></button></Link> 
                         </div>
-                        <div className='search'>
+                        <div className='search' >
                         <SearchBar/>
                         </div>
                     </div>

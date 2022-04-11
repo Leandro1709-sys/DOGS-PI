@@ -8,9 +8,7 @@ const initialState = {
      dogsBreed : [],
      allTemps: [],
      dogsAll :[],
-     detail:[]
-    
-     
+     detail:[],
 }
 
 export default function reducer(state=initialState, {type, payload}){
@@ -110,7 +108,8 @@ export default function reducer(state=initialState, {type, payload}){
 
             case ORDER_BY_WEIGTH :
                 console.log('ORDER_BY_WEIGTH',state.dogsBreed)
-                let newState=state.dogsBreed.filter((e)=>e.weight.length>3||e.weight.includes('NaN'));
+                let newState2=state.dogsBreed.filter((e)=>e.weight.length>3);
+                let newState=newState2.filter((e)=>!e.weight.includes('NaN'));
                 let sortedWeigth= payload==='asc'?
                 newState.sort(function (a,b){
                     if(parseInt(a.weight.replace(/ - /g,'')) > parseInt(b.weight.replace(/ - /g,'')) ){
@@ -143,12 +142,14 @@ export default function reducer(state=initialState, {type, payload}){
                 return{
                     ...state,
                     dogsBreed : payload,
+                  
                 }
                 
             }else{
                 alert(payload.err)
                return{ ...state }
             }
+
             case GET_DETAIL : 
             if(!payload.err){
                 return{

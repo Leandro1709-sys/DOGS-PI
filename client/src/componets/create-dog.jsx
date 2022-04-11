@@ -63,7 +63,7 @@ export default function CreateDog(){
         temperament:[]
     })
 
-   console.log('errors => ',errors)
+   console.log('input => ',input)
 
     // useEffect(()=>{
     //     dispatch(getAllTemps());},[dispatch]);
@@ -76,17 +76,33 @@ export default function CreateDog(){
         setErrors(validate({
             ...input,
             [e.target.name]:e.target.value}))
-    console.log(errors)
+   // console.log(errors)
     }
 
     function handleSelect(e){
-       // console.log('entra handleSelect')
+     //   console.log('value del target SLECT',e.target.value)
        // e.preventDefault();
+       if(input.temperament.includes(e.target.value)){
+        alert('Ya seleccionó ese temperamento! :)')
+    } else {
        setInput({...input,
         temperament:[...input.temperament, e.target.value]
     })
- //   console.log(input)
 }
+    
+}
+
+    function handleDel(e){
+         //console.log(input.temperament)
+        e.preventDefault();
+       
+        setInput({...input,
+         temperament:input.temperament.filter(el=>el!=e.target.value)
+     })
+    
+}
+ //   console.log(input)
+
 function hadleSubmit(e){
     e.preventDefault();
    //    console.log(input)
@@ -169,13 +185,13 @@ return(
                 </select>
 
              </div> 
-             <div>
+             <ul >
              Temperamentos Seleccionados:
-                 { input.temperament.length?input.temperament.map((e)=>{
+                 { input.temperament.length?input.temperament.map((t)=>{
                     
-                 return <li className='labels' style={{color:"#000000"}}> {e} </li>
+                 return <li value={t} key={t}> {t} <button value={t} onClick={(e)=>handleDel(e)} className='elimina'>X</button></li>
                  }):<li className='errors' > Debe selecionar al menos un temperamento!</li>}
-             </div>
+             </ul>
              <div className="botonera">
              { //VALIDACION DE ESTADO PARA HABILITAR BOTON
                  input.name===''||input.min_height===''||input.mmax_height===''||input.min_weight===''
