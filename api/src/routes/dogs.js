@@ -7,12 +7,11 @@ const axios = require('axios');
 const {Dog,Temperament} = require('../db'); 
 
 
-const getApiInfo = async()=>{
+const getApiInfo = ()=>{
    // console.log('entra App Info')
-    try{
-        const dogFind = await axios.get('https://api.thedogapi.com/v1/breeds?api_key=965a70f9-1376-41d2-9150-9b9f0703c803');
-       //console.log(dogFind)
-        const dogData = await dogFind.data.map(e=>{
+   const dogData1=
+        axios.get('https://api.thedogapi.com/v1/breeds?api_key=965a70f9-1376-41d2-9150-9b9f0703c803')
+        .then((respuesta)=>respuesta.data.map(e=>{
             return {
                 id: e.id,
                 name: e.name,
@@ -22,13 +21,9 @@ const getApiInfo = async()=>{
                 life_span: e.life_span,
                 temperaments: e.temperament?e.temperament:"Sin temperamento asignado",
             }
-        });
-       // console.log(dogData)
-        return dogData;
-    } catch(e){
-        return e;
-    }
-   
+        }))
+
+        return dogData1;
 };
 
 
@@ -90,7 +85,7 @@ router.get('/', async (req,res,next)=>{
 });
 
 router.get('/:id', async (req,res,next)=>{
-    //  console.log('entra /id')
+  try{  //  console.log('entra /id')
     const {id}=req.params;
     // console.log(req.params.id)
     const allDogs= await getAllDogs();
@@ -118,7 +113,10 @@ router.get('/:id', async (req,res,next)=>{
 
         //newDog[0].temperaments=oso
         //console.log(temps);
-        res.send(resultado);
+        res.status(202).send(resultado);}
+        catch (e){
+            res.status(404).send(e)
+        }
     });
 
 
@@ -150,5 +148,17 @@ router.post('/', async (req,res,next)=>{
     res.send('Se agregó correctamente la nueva raza!')
 });
 
+router.delete('/:id', (req,res,next)=>{
+        const {id} = req.params;
+     
+             Dog.destroy({
+                where: {
+                  id: id
+                }
+              }).then(()=> res.status(202).send('Borrado!').catch((err)=>res.status(404).send(err))
+              )
+
+        
+})
 
 module.exports = router;

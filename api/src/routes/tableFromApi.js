@@ -15,6 +15,7 @@ module.exports = async()=>{
         const tempData = await dogFind.data.map(e=>{
             if( e.temperament){
                 newArray.push(e.temperament.replace(/,/g,''));
+               // console.log(newArray)
             } else {
                 newArray.push('Sin_temperamento_asociado');
             }   

@@ -16,6 +16,7 @@ export default  function Home (){
     const dispatch = useDispatch();
     const temeperaments = useSelector((state)=>state.allTemps);
     const dogs = useSelector((state)=>state.dogsBreed);
+    const busqueda=useSelector((state)=>state.byName);
  //   const byName = useSelector((state)=>state.byName);
     const [orden,setOrden] = useState('')
      
@@ -26,11 +27,14 @@ export default  function Home (){
     const indexOfFirstDog=indexOfLastDog-dogsxPage;
     const currentDog = dogs.slice(indexOfFirstDog,indexOfLastDog);
 
-    //console.log(currentDog)
+//    console.log('busqueda = > ',busqueda)
     const paginado = (pageNumber)=>{
-        setCurrentPage(pageNumber);
+      
+            setCurrentPage(pageNumber);
+      
     }
-
+    
+    
     useEffect(()=>{
         dispatch(getAllTemps());},[dispatch]);
     
@@ -67,7 +71,14 @@ export default  function Home (){
         setCurrentPage(1);
        setOrden(`Ordenado ${e.target.value}`)
     }
- 
+    
+    function handleCreated(e){
+        e.preventDefault();
+        dispatch(filterCreated(e.target.value));
+        setCurrentPage(1);
+       
+    }
+
     //console.log(dogs)
     
   
@@ -90,7 +101,7 @@ export default  function Home (){
                         <Link to='/DogCreate'><button className='botonsCrea'><span>CREA UNA NUEVA RAZA!</span></button></Link> 
                         </div>
                         <div className='search' >
-                        <SearchBar/>
+                        <SearchBar set={setCurrentPage}/>
                         </div>
                     </div>
                 <div className="filtrado">
@@ -130,13 +141,13 @@ export default  function Home (){
                 { 
                     currentDog && currentDog.map((e)=> {
                        
-                        return <Card id={e.id} name={e.name} weight={e.weight} temperament={e.temperament?e.temperament:e.temperaments} image={e.imagen}/>
+                        return <Card id={e.id} altura={ e.height} name={e.name} weight={e.weight} temperament={e.temperament?e.temperament:e.temperaments} image={e.imagen}/>
                        
                     })
                 }
             </div>
             <div className="paginado">
-                <Paginado dogsxPage={dogsxPage} dogs={dogs.length} paginado={paginado}/>
+                <Paginado dogsxPage={dogsxPage} dogs={dogs.length} paginado={paginado} />
             </div>
             </>:<>
             <div><img src={Gif2}/><h1>SEARCHING...</h1></div>

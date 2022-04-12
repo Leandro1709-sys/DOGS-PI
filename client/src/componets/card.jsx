@@ -2,7 +2,7 @@ import {React} from 'react';
 import './card.css'
 import { Link } from 'react-router-dom';
 
-export default function Card({i,id,name,temperament,weight,image}){
+export default function Card({id,name,temperament,weight,image,altura}){
     var temperamento='';
     // CONTROL DE FORMATOS DE TEMPERAMENTOS, SI ES LA LLAMADA INCIAL DEL HOME 
     // O ES LA LLAMDA DESDE EL FILTRADO POR TEMPERAMENTOS
@@ -41,10 +41,12 @@ export default function Card({i,id,name,temperament,weight,image}){
            <div className='card_body'>
                <div className='data'>
                 <img src={image} className='imgCard'></img>
-                <p>Peso: {weight} KG<br/>
+                <p>Peso: {weight} KG<br/></p>
+                <p>Altura: {altura} CM<br/>
                 {temperamento} 
                 </p>
-                </div>
+                              
+            </div>
                 <div className='botonera'>
               <Link to={`/Detail/${id}`} className='btn'><a>DETALLES</a></Link>
               </div>

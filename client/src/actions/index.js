@@ -95,8 +95,8 @@ export  function getDetail(id){
             payload : detail.data,
         })
 
-    }catch (err){
-        alert(err)
+    }catch (e){
+        alert(e)
     }
 }
 }

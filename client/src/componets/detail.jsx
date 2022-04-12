@@ -43,7 +43,7 @@ export default function Detail() {
             <div className="description">
                   <h4>Altura: {Dog.height} centimetros</h4> 
                   <h4>Peso: {Dog.weight} kiligramos</h4> 
-                  <h4>Años de vida: {Dog.life_span} años</h4> 
+                  <h4>Años de vida: {Dog.life_span.replace('years','')} años</h4> 
                   <h3>Temperamentos:</h3><h4>{Dog.temperaments}</h4> 
             </div>
             <Link to="/Home" className='link'><a className='btn'>VOLVER AL HOME</a></Link>

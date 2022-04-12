@@ -1,6 +1,5 @@
 
 import "./paginado.css";
-
 export {React} from 'react';
 
 
@@ -17,9 +16,9 @@ export default  function Paginado ({dogsxPage,dogs,paginado}){
         pageNumber.push(i+1)
     }
     //console.log(pageNumber,'numero de pagina')
-    
+  setTimeout(() => {
     const btnContainer = document.getElementById("MyId");
-    console.log('boton container', btnContainer);
+   // console.log('boton container', btnContainer);
     // Get all buttons with class="btn" inside the container
   if(btnContainer) { var btns = btnContainer.getElementsByClassName("numero");
     
@@ -38,17 +37,22 @@ export default  function Paginado ({dogsxPage,dogs,paginado}){
       });
     }
 }
+    
+  }, 1000);
+   var a=0;
     return(
         
         <nav className="paginador">
             <div id="MyId" className="number">
-              
+
+           
                 {pageNumber &&
                 pageNumber.map(number=>(
                     
                     <a onClick={()=>paginado(number)} className="numero" value={number}>{number}</a>
                     
-                ))}
+                ))}    
+          
             </div>
         </nav>
     )

@@ -9,6 +9,7 @@ const initialState = {
      allTemps: [],
      dogsAll :[],
      detail:[],
+     byName:[]
 }
 
 export default function reducer(state=initialState, {type, payload}){
@@ -142,6 +143,7 @@ export default function reducer(state=initialState, {type, payload}){
                 return{
                     ...state,
                     dogsBreed : payload,
+                    byName: [1]
                   
                 }
                 

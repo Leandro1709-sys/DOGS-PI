@@ -134,13 +134,17 @@ return(
             <div className='raza'>
                 <label className='labels'>Nombre de la Raza:</label>
                 <input type="text"  value={input.name} name="name" className='name' onChange={(e)=>handleChange(e)} />
-                {input.name===''?<a className="errors"> *campo obligatorio </a>:<a className="errors2">Comletado correctamente!</a>}
+                {input.name===''?<a className="errors"> *campo obligatorio </a>:<a className="errors2">Comlpetado correctamente!</a>}
             </div>
            
             <div className='raza'>
                 <label className='labels'>Altura mínima:</label>
                     <input className='name' type="text" onChange={(e)=>handleChange(e)}  value={input.min_height} name="min_height" placeholder="centímetros..."/>
-                    {input.min_height===''?<a className="errors"> *campo obligatorio </a>:errors.min_height?<a className="errors">{errors.min_height}</a>:<a className="errors2">Comletado correctamente!</a>} 
+                    {input.min_height===''?
+                    <a className="errors"> *campo obligatorio </a>
+                    :errors.min_height?
+                    <a className="errors">{errors.min_height}</a>:
+                    <a className="errors2">Comletado correctamente!</a>} 
             </div>
            
             <div className='raza'>
@@ -194,10 +198,10 @@ return(
              </ul>
              <div className="botonera">
              { //VALIDACION DE ESTADO PARA HABILITAR BOTON
-                 input.name===''||input.min_height===''||input.mmax_height===''||input.min_weight===''
+                 input.name===''||input.min_height===''||input.max_height===''||input.min_weight===''
                  ||input.max_weight===''||input.min_life_span===''||input.max_life_span===''||errors.min_height||errors.max_height||errors.min_weight
                  ||errors.max_weight||errors.min_life_span||errors.max_life_span||errors.imagen
-                 ||!input.temperament.length?<button className="botonso23" type="submit" disabled='true'><span> controle el formulario! </span></button>
+                 ||!input.temperament.length?<button className="botonso23" type="submit" disabled='true'><span> Errores en el Fromulario </span></button>
                  : <button className="botonso2" type="submit" ><span>Crear RAZA!</span> </button>
              }
             
